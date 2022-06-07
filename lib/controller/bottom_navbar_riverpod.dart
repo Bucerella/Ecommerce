@@ -5,22 +5,16 @@ import 'package:ecommerce_riverpod/view/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavbarRiverpod extends ChangeNotifier {
+  int currentIndex = 0;
+
   List<BottomNavigationBarItem> items = [
     BottomNavigationBarItem(
         icon: const Icon(Icons.home), label: Constants.products),
     BottomNavigationBarItem(
         icon: const Icon(Icons.favorite), label: Constants.fav),
     BottomNavigationBarItem(
-      icon: const Icon(
-        Icons.badge,
-        color: Constants.appColor,
-      ),
-      label: Constants.basket,
-
-    ),
+        icon: const Icon(Icons.badge), label: Constants.basket),
   ];
-
-  int currentIndex = 0;
 
   void setCurrentIndex(int index) {
     currentIndex = index;
