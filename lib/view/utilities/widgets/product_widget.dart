@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_riverpod/model/product_model.dart';
 import 'package:ecommerce_riverpod/view/utilities/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,8 +26,13 @@ class ProductWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRect(
-                child: Image.network(productModel.imagePath),
+              Expanded(
+                child: ClipRect(
+                    child: CachedNetworkImage(
+                  placeholder: (context, url) =>
+                      Image.network(productModel.imagePath),
+                  imageUrl: productModel.imagePath,
+                )),
               ),
               Expanded(
                 child: Padding(
@@ -69,9 +75,10 @@ class ProductWidget extends StatelessWidget {
                           border: Border.all(color: Colors.blue),
                         ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Icon(CupertinoIcons.bag_badge_plus),
-                            const SizedBox(width: 5),
+                            const SizedBox(width: 8),
                             Text(
                               Constants.add,
                               style: const TextStyle(

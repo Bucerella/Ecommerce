@@ -1,5 +1,4 @@
 import 'package:ecommerce_riverpod/model/product_model.dart';
-import 'package:ecommerce_riverpod/view/utilities/constants/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grock/grock.dart';
@@ -22,22 +21,28 @@ class ProductRiverpod extends ChangeNotifier {
     }
   }
 
-  void setTotalPrice(ProductModel model) {
+  void addTotalPrice(ProductModel model) {
     totalPrice += model.price;
+  }
+
+  void deleteTotalPrice(ProductModel model) {
+    totalPrice -= model.price;
   }
 
   void addedBasket(ProductModel model) {
     basketProducts.add(model);
-    setTotalPrice(model);
-    Grock.snackBar(
-      title: Constants.successful,
-      description: "${model.title} ${Constants.addedSuccessfully}",
-      icon: Icons.check,
-    );
+    addTotalPrice(model);
+    notifyListeners();
+  }
+
+  void deleteBasket(ProductModel model) {
+    basketProducts.remove(model);
+    deleteTotalPrice(model);
+    notifyListeners();
   }
 
   void init() {
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 30; i++) {
       products.add(
         ProductModel(
           isFav: false,

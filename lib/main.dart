@@ -16,7 +16,7 @@ class EcommerceRiverpod extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Constants.ecommerce,
       theme: ThemeData(primaryColor: Constants.appColor),
-      scaffoldMessengerKey: Grock.snackbarMessengerKey,
+      scaffoldMessengerKey: Grock.scaffoldMessengerKey,
       home: const BaseScaffold(),
     );
   }

@@ -9,6 +9,7 @@ class Constants {
   static String ecommerce = "E-commerce";
   static String successful = "Successful";
   static String addedSuccessfully = "added successfully!";
+  static String deletedSuccessfully = "deleted successfully!";
   static String products = "Products";
   static String totalPrice = "Total Price";
   static String goToProducts = "Go to Products";

@@ -3,6 +3,7 @@ import 'package:ecommerce_riverpod/view/utilities/constants/constants.dart';
 import 'package:ecommerce_riverpod/view/utilities/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grock/grock.dart';
 
 class BasketScreen extends ConsumerWidget {
@@ -35,11 +36,30 @@ class BasketScreen extends ConsumerWidget {
                   scrollEffect: const NeverScrollableScrollPhysics(),
                   padding: [20, 10].horizontalAndVerticalP,
                   itemBuilder: (context, index) {
-                    return ProductWidget(
-                      productModel: product.basketProducts[index],
-                      setFav: () =>
-                          product.setFavorite(product.basketProducts[index]),
-                      setBasket: () =>{},
+                    return Slidable(
+                      startActionPane: ActionPane(
+                        motion: const DrawerMotion(),
+                        children: [
+                          SlidableAction(
+                            autoClose: true,
+                            flex: 1,
+                            onPressed: (value) {
+                              product
+                                  .deleteBasket(product.basketProducts[index]);
+                            },
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                            icon: Icons.delete,
+                            label: 'Delete',
+                          ),
+                        ],
+                      ),
+                      child: ProductWidget(
+                        productModel: product.basketProducts[index],
+                        setFav: () =>
+                            product.setFavorite(product.basketProducts[index]),
+                        setBasket: () => {},
+                      ),
                     );
                   },
                 ),
